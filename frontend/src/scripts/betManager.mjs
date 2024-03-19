@@ -1,3 +1,5 @@
+import { editionNumber } from './startup.mjs';
+
 const numbersList = document.querySelectorAll('.numero');
 const inputField = document.querySelector('.selectedNumbers');
 const clearButton = document.querySelector('.clearButton');
@@ -17,6 +19,29 @@ clearButton.addEventListener('click', () => {
 
     selectedNumbers = [];
     inputField.value = '';
+});
+
+
+betButton.addEventListener('click', async () => {
+    if(selectedNumbers.length === 5) {
+        // var id = await fetch('http://localhost:8080/bets/nextId', {
+        //     method: 'GET'
+        // }).then(response => response.json()).then(data => {
+        //     return data;
+        // });
+        await fetch('http://localhost:8080/bet/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: 1000,
+                numbers: selectedNumbers,
+                better: 85699659072,
+                edition: editionNumber
+            })
+        });
+    }else {
+        alert('Selecione 5 números');
+    }
 });
 
 

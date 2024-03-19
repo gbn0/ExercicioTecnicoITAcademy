@@ -4,21 +4,14 @@ import { createBet, getBetById, getBets, getBetByBetter, getBetBy_Id} from '../d
 
 export const create = async (req: express.Request, res: express.Response) => {
     try {
-        const {id, numbers, better} = req.body;
+        const {id, numbers, better, edition} = req.body;
 
-        if (!id || !numbers || !better) {
+        if (!id || !numbers || !better || !edition) {
             res.sendStatus(400);
             return;
         }
 
-        const existingBet = await getBetById(id);
-
-        if(existingBet) {
-            res.sendStatus(409);
-            return;
-        }
-
-        const bet = await createBet(id, numbers, better);
+        const bet = await createBet(id, numbers, better, edition);
 
         return res.status(200).json(bet).end();
     }catch(error) {
@@ -29,10 +22,10 @@ export const create = async (req: express.Request, res: express.Response) => {
 
 export const select = async (req: express.Request, res: express.Response) => {
     try {
-        const {id, better, _id} = req.body;
-        if(_id) {
-            const user = await getBetBy_Id(_id);
-            return res.status(200).json(user).end();
+        const {id, better, edition} = req.body;
+        if(edition) {
+            const bet = await getBetBy_Id(edition);
+            return res.status(200).json(bet).end();
         }
         else if (!id && !better) {
             const bets = await getBets();
