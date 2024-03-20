@@ -1,9 +1,12 @@
 import { editionNumber } from './startup.mjs';
+import { cpf, name } from './startup.mjs';
 
 const numbersList = document.querySelectorAll('.numero');
 const inputField = document.querySelector('.selectedNumbers');
 const clearButton = document.querySelector('.clearButton');
 const betButton = document.querySelector('.betButton');
+
+console.log(cpf + ' ' + name);
 
 numbersList.forEach((element) => {
     element.addEventListener('click', () => {

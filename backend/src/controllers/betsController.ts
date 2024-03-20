@@ -4,11 +4,21 @@ import { createBet, getBetById, getBets, getBetByBetter, getBetBy_Id} from '../d
 
 export const create = async (req: express.Request, res: express.Response) => {
     try {
-        const {id, numbers, better, edition} = req.body;
+        let {id, numbers, better, edition} = req.body;
 
-        if (!id || !numbers || !better || !edition) {
+        if (!id  || !better || !edition) {
             res.sendStatus(400);
             return;
+        }
+
+        if(numbers.length == 0) {
+            numbers = [];
+            while(numbers.length < 5) {
+                var drawnNumber = Math.floor(Math.random() * 50);
+                if(!numbers.includes(drawnNumber)) {
+                    numbers.push(drawnNumber);
+                }
+            }
         }
 
         const bet = await createBet(id, numbers, better, edition);

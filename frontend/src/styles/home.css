@@ -9,6 +9,7 @@
         --button-color: linear-gradient(298deg, rgb(5, 230, 91), rgb(6, 138, 57));
         --button-hover: linear-gradient(298deg, rgb(6, 212, 85), rgb(6, 124, 51));
         --img-color: 1;
+        --popup-background: linear-gradient(128deg, rgb(51, 50, 50) 56%, rgb(80, 77, 77));
     }
 }
 
@@ -21,6 +22,7 @@
         --button-color: linear-gradient(298deg, rgb(5, 230, 91), rgb(6, 138, 57));
         --button-hover: linear-gradient(298deg, rgb(6, 212, 85), rgb(6, 124, 51));
         --img-color: 0;
+        --popup-background: linear-gradient(298deg, rgb(223, 223, 223), rgb(255, 255, 255));
     }
 }
 
@@ -100,4 +102,73 @@ a {
     width: 12%;
     margin-left: 1rem;
     filter: invert(var(--img-color));
+}
+
+
+.registration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-300%, -50%);
+    width: 40%;
+    height: 50%;
+    border-radius: 2rem;
+    background-color: #000;
+    background: var(--popup-background);
+    z-index: 3;
+    border: solid lightgray 0.2rem;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.active {
+    visibility: visible;
+    transform: translate(-50%, -50%);
+    transition: 0.3s ease-in-out;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+label {
+    text-align: left;
+    color: var(--text-color);
+    margin: 0.5rem;
+    font-size: 2.5rem;
+}
+
+input {
+    width: 75%;
+    height: 2.8rem;
+    border: solid lightsteelblue .1rem;
+    border-radius: 0.7rem;
+    font-size: 1.5rem;
+    text-align: center;
+    background: transparent;
+    color: var(--text-color);
+    margin: 0.7rem;
+}
+
+.submitRegister {
+    width: 20rem;
+    margin-top: 1rem;
+    height: 5rem;
+    background: var(--button-color);
+    border: none;
+    border-radius: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

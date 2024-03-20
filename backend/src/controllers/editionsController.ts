@@ -69,7 +69,7 @@ export const draw = async (req: express.Request, res: express.Response) => {
                 }
             }
 
-            while(!(winners.length > 0)) {
+            while(!(winners.length > 0) && drawnNumbers.length < 30) {
                 for(var i = 0; i < editionBets.length; i++) {
                     var hits = 0;
                     for(var j = 0; j < 5; j++) {

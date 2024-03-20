@@ -14,9 +14,20 @@
             <p>Aqui você pode fazer sua aposta e ter uma chance de ganhar milhares de reais!</p>
         </div>
         <div class="buttons">
-            <a href="bet.html"><button class="betButton">APOSTAR<img src="images/betting.png" alt=""></button></a>
+            <button class="betButton">APOSTAR<img src="images/betting.png" alt=""></button>
             <a href="management.html"><button class="manageButton">GERENCIAR<img src="images/manage.png" alt=""></button></a>
         </div>
+    </div>
+
+    <div class="registration">
+        <div class="form">
+            <label for="cpfInput">CPF</label>
+            <input id="cpfInput" class="cpfInput" type="number" required minlength=11 maxlength=11/>
+            <label for="nameInput">Nome</label>
+            <input id="nameInput" class="nameInput" type="text" required/>
+            <button class="submitRegister">PROSSEGUIR</button>
+        </div>
+            
     </div>
     <script type="module"src="scripts/startup.mjs"></script>
 </body>

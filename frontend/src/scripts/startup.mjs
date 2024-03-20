@@ -1,4 +1,16 @@
+const registrationWindow = document.querySelector('.registration');
+const cpfInput = document.querySelector('.cpfInput');
+const nameInput = document.querySelector('.nameInput');
+const betButton = document.querySelector('.betButton');
+const closeRegistrationButton = document.querySelector('.submitRegister');
+
+betButton.addEventListener('click', openRegistration);
+
+closeRegistrationButton.addEventListener('click', closeRegistration);
+
 export let editionNumber = 1;
+export let cpf;
+export let name;
 
 const checkEdition = async () => {
     return await fetch('http://localhost:8080/edition/last', {
@@ -32,6 +44,44 @@ async function createNewEdition() {
         }).then(response => response.json()).then(data => console.log(data));
     }
 
+}
+
+function openRegistration() {
+    registrationWindow.classList.add('active');
+}
+
+async function closeRegistration() {
+    if(cpfInput.value.length != 11) {
+        alert('Preencha os campos corretamente');
+        return;
+    }
+    registrationWindow.classList.remove('active');
+    
+    try {
+        const res = await fetch('http://localhost:8080/user/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cpf: parseInt(cpfInput.value), name: nameInput.value })
+        }).then((res) => {
+            console.log(res);
+            cpf = cpfInput.value;
+            name = nameInput.value;
+            cpfInput.value = '';
+            nameInput.value = '';
+            setTimeout(2000).then(() => {
+                window.location.assign('/frontend/src/bet.html');
+            });
+        })
+
+
+        
+
+        
+
+    }catch(error) {
+        // console.log(error);
+    }
+        
 }
 
 
