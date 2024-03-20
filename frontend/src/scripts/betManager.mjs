@@ -28,14 +28,14 @@ clearButton.addEventListener('click', () => {
 
 
 randomBetButton.addEventListener('click', async () => {
-    var id = await fetch('http://localhost:8080/bet/nextId', {
+    var id = await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app/bet/nextId', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 edition: edition
             })
         }).then(response => response.json()).then(data => {
-            fetch('http://localhost:8080/bet/create', {
+            fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//bet/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -54,14 +54,14 @@ randomBetButton.addEventListener('click', async () => {
 
 betButton.addEventListener('click', async () => {
     if(selectedNumbers.length === 5) {
-        var id = await fetch('http://localhost:8080/bet/nextId', {
+        var id = await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app/bet/nextId', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 edition: edition
             })
         }).then(response => response.json()).then(data => {
-            fetch('http://localhost:8080/bet/create', {
+            fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app/bet/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

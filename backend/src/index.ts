@@ -8,9 +8,7 @@ import router from './router';
 
 const app = express();
 
-app.use(cors({
-    credentials: true,
-}));
+app.use(cors());
 
 app.use(express.json());
 

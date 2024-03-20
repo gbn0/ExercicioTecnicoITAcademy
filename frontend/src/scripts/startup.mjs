@@ -4,6 +4,8 @@ const nameInput = document.querySelector('.nameInput');
 const betButton = document.querySelector('.betButton');
 const closeRegistrationButton = document.querySelector('.submitRegister');
 
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+
 betButton.addEventListener('click', openRegistration);
 
 closeRegistrationButton.addEventListener('click', closeRegistration);
@@ -13,7 +15,7 @@ let cpf;
 let name;
 
 const checkEdition = async () => {
-    return await fetch('http://localhost:8080/edition/last', {
+    return await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//edition/last', {
         method: 'GET'
     }).then(response => response.json()).then(data => {
         if(data == null) {
@@ -37,7 +39,7 @@ async function createNewEdition() {
     if(await checkEdition()) {
         
         const randomPrizeNumber = Math.floor(Math.random() * (1000001 - 250000) + 250000);
-        await fetch('http://localhost:8080/edition/create', {
+        await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//edition/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: editionNumber, prize: randomPrizeNumber })
@@ -58,7 +60,7 @@ async function closeRegistration() {
     registrationWindow.classList.remove('active');
     
     try {
-        const res = await fetch('http://localhost:8080/user/create', {
+        const res = await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//user/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ cpf: parseInt(cpfInput.value), name: nameInput.value })
