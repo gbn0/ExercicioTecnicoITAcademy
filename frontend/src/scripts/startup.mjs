@@ -15,9 +15,16 @@ let cpf;
 let name;
 
 const checkEdition = async () => {
-    return await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//edition/last', {
+    return await fetch('https://exercicio-tecnico-it-academy-33ykzsfsl.vercel.app/edition/last', {
         method: 'GET'
-    }).then(response => response.json()).then(data => {
+    }).then(response => {
+
+        if (!response.ok) {
+            throw new Error(`Erro de requisição: ${response.status}`);
+          }
+        return response.json()
+    }).then(data => {
+        
         if(data == null) {
             localStorage.setItem('edition', editionNumber);
             return true;

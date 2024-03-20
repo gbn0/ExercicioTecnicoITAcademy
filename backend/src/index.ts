@@ -10,6 +10,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use(cors());
+
 const server = http.createServer(app);
 
 server.listen(8080, () => {
