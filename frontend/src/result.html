@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="./styles/result.css">
     <link rel="icon" href="images/lottery.png">
     <title>Lotérica</title>
 </head>
 <body>
+
+    <div class="content">
+        <a href="home.html"><button class="homeBtn"><img src="images/previous.png" alt="Arrow to the previous page"></button></a>
+    </div>
+
+    <div class="results">
+        <h1 class="editionText"></h1>
+        <h1>Números sorteados:</h1>
+        <h1 class="drawnNumbers"></h1>
+        <div class="table">
+            <table class="resultTable">
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Numeros</th>
+                    <th>Premiação</th>
+                </tr>
+            </table>
+        </div>
+    </div>
     
+    <script type="module" src="scripts/results.mjs"></script>
 </body>
 </html>

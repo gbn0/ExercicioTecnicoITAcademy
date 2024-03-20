@@ -12,5 +12,5 @@ export const getEditions = () => EditionsModel.find();
 export const getEditionById = (id: number) => EditionsModel.findOne({id});
 export const getEditionByWinner = (winner: mongoose.Types.ObjectId) => EditionsModel.find({winner});
 export const createEdition = (id: Number, prize:Number) => EditionsModel.create({id, prize});
-export const deleteEditionById = (id: number) => EditionsModel.findOneAndDelete({id});
-export const updateEditionWinnersById = (id: number, winners: mongoose.Types.ObjectId[], ) => EditionsModel.findByIdAndUpdate({id}, {winners});
+export const deleteEditionById = (id: Number) => EditionsModel.findOneAndDelete({id});
+export const updateEditionWinnersById = (_id: mongoose.Types.ObjectId, winners: mongoose.Types.ObjectId[], ) => EditionsModel.findByIdAndUpdate({_id}, {winners});

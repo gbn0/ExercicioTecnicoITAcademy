@@ -8,24 +8,24 @@ betButton.addEventListener('click', openRegistration);
 
 closeRegistrationButton.addEventListener('click', closeRegistration);
 
-export let editionNumber = 1;
-export let cpf;
-export let name;
+let editionNumber = 1;
+let cpf;
+let name;
 
 const checkEdition = async () => {
     return await fetch('http://localhost:8080/edition/last', {
         method: 'GET'
     }).then(response => response.json()).then(data => {
         if(data == null) {
-            console.log('No editions found');
+            localStorage.setItem('edition', editionNumber);
             return true;
         }else if(data.winners.length == 0) {
-            console.log('Edition already started')
             editionNumber = data.id;
+            localStorage.setItem('edition', editionNumber);
             return false;
         }else if (data.winners.length > 0) {
-            console.log('Edition already finished');
             editionNumber = data.id + 1;
+            localStorage.setItem('edition', editionNumber);
             return true; 
         }
     });
@@ -35,13 +35,13 @@ const checkEdition = async () => {
 
 async function createNewEdition() {
     if(await checkEdition()) {
+        
         const randomPrizeNumber = Math.floor(Math.random() * (1000001 - 250000) + 250000);
-        console.log(editionNumber);
         await fetch('http://localhost:8080/edition/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: editionNumber, prize: randomPrizeNumber })
-        }).then(response => response.json()).then(data => console.log(data));
+        }).then(response => response.json());
     }
 
 }
@@ -66,23 +66,23 @@ async function closeRegistration() {
             console.log(res);
             cpf = cpfInput.value;
             name = nameInput.value;
+            localStorage.setItem('cpf', cpf);
+            localStorage.setItem('name', name);
             cpfInput.value = '';
             nameInput.value = '';
-            setTimeout(2000).then(() => {
-                window.location.assign('/frontend/src/bet.html');
-            });
-        })
-
-
-        
-
-        
-
+            setTimeout(changeScreen, 1000);
+        });
     }catch(error) {
         // console.log(error);
     }
         
 }
 
+function changeScreen() {
+    window.location.assign('/frontend/src/bet.html');
+}
+
 
 createNewEdition();
+
+

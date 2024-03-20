@@ -1,12 +1,13 @@
-import { editionNumber } from './startup.mjs';
-import { cpf, name } from './startup.mjs';
-
 const numbersList = document.querySelectorAll('.numero');
 const inputField = document.querySelector('.selectedNumbers');
 const clearButton = document.querySelector('.clearButton');
 const betButton = document.querySelector('.betButton');
+const randomBetButton = document.querySelector('.randomButton');
 
-console.log(cpf + ' ' + name);
+
+const cpf = parseInt(localStorage.getItem('cpf'));
+const name = localStorage.getItem('name');
+const edition = localStorage.getItem('edition');
 
 numbersList.forEach((element) => {
     element.addEventListener('click', () => {
@@ -17,6 +18,7 @@ let selectedNumbers = [];
 
 clearButton.addEventListener('click', () => {
     numbersList.forEach((element) => {
+
         element.classList.remove('active');
     });
 
@@ -25,23 +27,56 @@ clearButton.addEventListener('click', () => {
 });
 
 
-betButton.addEventListener('click', async () => {
-    if(selectedNumbers.length === 5) {
-        // var id = await fetch('http://localhost:8080/bets/nextId', {
-        //     method: 'GET'
-        // }).then(response => response.json()).then(data => {
-        //     return data;
-        // });
-        await fetch('http://localhost:8080/bet/create', {
+randomBetButton.addEventListener('click', async () => {
+    var id = await fetch('http://localhost:8080/bet/nextId', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                edition: edition
+            })
+        }).then(response => response.json()).then(data => {
+            fetch('http://localhost:8080/bet/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: 1000,
-                numbers: selectedNumbers,
-                better: 85699659072,
-                edition: editionNumber
+                id: data,
+                numbers: [],
+                better: cpf,
+                edition: edition
+            })
+            }).then(response => response.json()).then(data => {
+                console.log(data);
+                alert('Aposta realizada com sucesso');
             })
         });
+});
+
+
+betButton.addEventListener('click', async () => {
+    if(selectedNumbers.length === 5) {
+        var id = await fetch('http://localhost:8080/bet/nextId', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                edition: edition
+            })
+        }).then(response => response.json()).then(data => {
+            fetch('http://localhost:8080/bet/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: data,
+                numbers: selectedNumbers,
+                better: cpf,
+                edition: edition
+            })
+            }).then(response => response.json()).then(data => {
+                console.log(data);
+                alert('Aposta realizada com sucesso');
+                window.location.assign('/frontend/src/home.html');
+            })
+        });
+        
     }else {
         alert('Selecione 5 números');
     }

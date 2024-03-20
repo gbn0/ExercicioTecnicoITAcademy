@@ -63,7 +63,7 @@ export const draw = async (req: express.Request, res: express.Response) => {
         var drawnNumbers: Number[] = [];
         if(edition && editionBets.length > 0) {
             while(drawnNumbers.length < 5) {
-                var drawnNumber = Math.floor(Math.random() * 50);
+                var drawnNumber = Math.floor(Math.random() * (50 - 1) + 1);
                 if(!drawnNumbers.includes(drawnNumber)) {
                     drawnNumbers.push(drawnNumber);
                 }
@@ -84,7 +84,7 @@ export const draw = async (req: express.Request, res: express.Response) => {
                 }
 
                 if(winners.length == 0) {
-                    var drawnNumber = Math.floor(Math.random() * 50);
+                    var drawnNumber = Math.floor(Math.random() * (50 - 1) + 1);
                     if(!drawnNumbers.includes(drawnNumber)) {
                         drawnNumbers.push(drawnNumber);
                     }
@@ -92,7 +92,10 @@ export const draw = async (req: express.Request, res: express.Response) => {
             }
 
             if(winners.length > 0) {
-                await updateEditionWinnersById(id, winners);
+                await updateEditionWinnersById(edition._id, winners);
+            }else {
+                var winners2: mongoose.Types.ObjectId[] = [new mongoose.mongo.ObjectId()];
+                await updateEditionWinnersById(edition._id, winners2);
             }
 
             var winnersRes: winnerObject[] = [];

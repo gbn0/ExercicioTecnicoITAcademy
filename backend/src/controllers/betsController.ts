@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { createBet, getBetById, getBets, getBetByBetter, getBetBy_Id} from '../db/bets';
+import { createBet, getBetById, getBets, getBetByBetter, getBetsByEdition} from '../db/bets';
 
 export const create = async (req: express.Request, res: express.Response) => {
     try {
@@ -34,7 +34,7 @@ export const select = async (req: express.Request, res: express.Response) => {
     try {
         const {id, better, edition} = req.body;
         if(edition) {
-            const bet = await getBetBy_Id(edition);
+            const bet = await getBetsByEdition(edition);
             return res.status(200).json(bet).end();
         }
         else if (!id && !better) {
@@ -48,6 +48,32 @@ export const select = async (req: express.Request, res: express.Response) => {
             return res.status(200).json(bet).end();
         }
         
+    }catch(error) {
+        console.log(error);
+        res.sendStatus(400);
+    }
+}
+
+export const next = async (req: express.Request, res: express.Response) => {
+    try {
+        const { edition } = req.body;
+
+        if (!edition) {
+            res.sendStatus(400);
+            return;
+        }
+
+        const bet = await getBetsByEdition(edition);
+
+        let nextId;
+        if(bet.length == 0) {
+            nextId = 1000;
+        }else {
+            nextId = bet[bet.length - 1].id + 1;
+        }
+        
+        return res.status(200).json(nextId).end();
+
     }catch(error) {
         console.log(error);
         res.sendStatus(400);
