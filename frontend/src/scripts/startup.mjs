@@ -42,12 +42,13 @@ async function createNewEdition() {
     if(await checkEdition()) {
         const randomPrizeNumber = Math.floor(Math.random() * (1000001 - 250000) + 250000);
         await api.post('edition/create', {
-            body: { id: editionNumber, prize: randomPrizeNumber }
-        }).then(response => response.json());
+            id: editionNumber,
+            prize: randomPrizeNumber
+        })
     }
 }
 
-function openRegistration() {
+function openRegistration() {   
     registrationWindow.classList.add('active');
 }
 
@@ -59,11 +60,10 @@ async function closeRegistration() {
     registrationWindow.classList.remove('active');
     
     try {
-        const res = await fetch('user/create', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cpf: parseInt(cpfInput.value), name: nameInput.value })
-        }).then((res) => {
+        const res = await api.post('user/create', {
+                cpf: parseInt(cpfInput.value), 
+                name: nameInput.value 
+            }).then((res) => {
             console.log(res);
             cpf = cpfInput.value;
             name = nameInput.value;

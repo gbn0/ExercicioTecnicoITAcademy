@@ -14,7 +14,7 @@ export const create = async (req: express.Request, res: express.Response) => {
         const existingUser = await getUserByCpf(cpf);
 
         if(existingUser) {
-            res.sendStatus(409);
+            res.sendStatus(200);
             return;
         }
 

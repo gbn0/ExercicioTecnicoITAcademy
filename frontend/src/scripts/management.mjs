@@ -13,7 +13,7 @@ yesButton.addEventListener('click', drawNumbers);
 
 async function loadData() {
     await api.post('bets/list', {
-    body: JSON.stringify({ edition: localStorage.getItem('edition') })
+        edition: localStorage.getItem('edition')
     }).then(response => response.json()).then(data => {
         if(data.length == 0) {
             table.innerHTML += `<tr><td>Sem apostas até o momento</td></tr>`;
@@ -30,7 +30,7 @@ loadData()
 
 async function drawNumbers() {
     await api.post('edition/draw', {
-        body: JSON.stringify({ id: localStorage.getItem('edition') })
+        id: localStorage.getItem('edition')
     }).then(response => response.json()).then(data => {
         console.log(data);
         localStorage.setItem('result', JSON.stringify(data));

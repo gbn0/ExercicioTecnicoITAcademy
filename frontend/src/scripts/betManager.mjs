@@ -32,17 +32,13 @@ clearButton.addEventListener('click', () => {
 
 randomBetButton.addEventListener('click', async () => {
     var id = await api.post('bet/nextId', {
-            body: JSON.stringify({
-                edition: edition
-            })
+            edition: edition
         }).then(response => response.json()).then(data => {
             api.post('bet/create', {
-            body: JSON.stringify({
                 id: data,
                 numbers: [],
                 better: cpf,
                 edition: edition
-            })
             }).then(response => response.json()).then(data => {
                 console.log(data);
                 alert('Aposta realizada com sucesso');
@@ -54,17 +50,13 @@ randomBetButton.addEventListener('click', async () => {
 betButton.addEventListener('click', async () => {
     if(selectedNumbers.length === 5) {
         var id = await api.post('bet/nextId', {
-            body: JSON.stringify({
-                edition: edition
-            })
+            edition: edition
         }).then(response => response.json()).then(data => {
             api.post('bet/create', {
-            body: JSON.stringify({
                 id: data,
                 numbers: selectedNumbers,
                 better: cpf,
                 edition: edition
-            })
             }).then(response => response.json()).then(data => {
                 console.log(data);
                 alert('Aposta realizada com sucesso');

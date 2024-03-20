@@ -1,3 +1,6 @@
+import { api } from './api.mjs';
+
+
 const table = document.querySelector('.resultTable');
 const drawnNumbers = document.querySelector('.drawnNumbers');
 const editionText = document.querySelector('.editionText');
