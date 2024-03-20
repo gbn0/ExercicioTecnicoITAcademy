@@ -8,8 +8,6 @@ import router from './router';
 
 const app = express();
 
-app.use(cors());
-
 app.use(express.json());
 
 const server = http.createServer(app);
