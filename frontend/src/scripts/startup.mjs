@@ -1,4 +1,4 @@
-import axios from 'https://cdn.skypack.dev/axios';
+import { api } from './api.mjs';
 
 const registrationWindow = document.querySelector('.registration');
 const cpfInput = document.querySelector('.cpfInput');
@@ -6,14 +6,7 @@ const nameInput = document.querySelector('.nameInput');
 const betButton = document.querySelector('.betButton');
 const closeRegistrationButton = document.querySelector('.submitRegister');
 
-export const api = axios.create({
-    baseURL: "https://exercicio-tecnico-it-academy.vercel.app/",
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Allow-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      },
-})
+
 
 betButton.addEventListener('click', openRegistration);
 
@@ -49,7 +42,7 @@ async function createNewEdition() {
     if(await checkEdition()) {
         const randomPrizeNumber = Math.floor(Math.random() * (1000001 - 250000) + 250000);
         await api.post('edition/create', {
-            body: JSON.stringify({ id: editionNumber, prize: randomPrizeNumber })
+            body: { id: editionNumber, prize: randomPrizeNumber }
         }).then(response => response.json());
     }
 }

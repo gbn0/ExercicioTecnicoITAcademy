@@ -1,3 +1,6 @@
+import { api } from './api.js';
+
+
 const numbersList = document.querySelectorAll('.numero');
 const inputField = document.querySelector('.selectedNumbers');
 const clearButton = document.querySelector('.clearButton');
@@ -28,16 +31,12 @@ clearButton.addEventListener('click', () => {
 
 
 randomBetButton.addEventListener('click', async () => {
-    var id = await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app/bet/nextId', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+    var id = await api.post('bet/nextId', {
             body: JSON.stringify({
                 edition: edition
             })
         }).then(response => response.json()).then(data => {
-            fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//bet/create', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            api.post('bet/create', {
             body: JSON.stringify({
                 id: data,
                 numbers: [],
@@ -54,16 +53,12 @@ randomBetButton.addEventListener('click', async () => {
 
 betButton.addEventListener('click', async () => {
     if(selectedNumbers.length === 5) {
-        var id = await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app/bet/nextId', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+        var id = await api.post('bet/nextId', {
             body: JSON.stringify({
                 edition: edition
             })
         }).then(response => response.json()).then(data => {
-            fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app/bet/create', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            api.post('bet/create', {
             body: JSON.stringify({
                 id: data,
                 numbers: selectedNumbers,

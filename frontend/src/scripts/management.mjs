@@ -1,3 +1,6 @@
+import { api } from './api.mjs';
+
+
 const table = document.querySelector('.dataTable');
 const drawButton = document.querySelector('.drawButton');
 const confirmationWindow = document.querySelector('.confirmation');
@@ -9,9 +12,7 @@ noButton.addEventListener('click', closeConfirmation);
 yesButton.addEventListener('click', drawNumbers);
 
 async function loadData() {
-    await fetch('http://localhost:8080/bets/list', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    await api.post('bets/list', {
     body: JSON.stringify({ edition: localStorage.getItem('edition') })
     }).then(response => response.json()).then(data => {
         if(data.length == 0) {
@@ -28,9 +29,7 @@ loadData()
 
 
 async function drawNumbers() {
-    await fetch('http://localhost:8080/edition/draw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    await api.post('edition/draw', {
         body: JSON.stringify({ id: localStorage.getItem('edition') })
     }).then(response => response.json()).then(data => {
         console.log(data);
