@@ -6,7 +6,6 @@
         --background: #181818;
         --text-color: #fff;
         --numbers-color: #000;
-        --header-background: rgba(80, 79, 79, 0.281);
         --button-color: linear-gradient(298deg, rgb(5, 230, 91), rgb(6, 138, 57));
         --button-hover: linear-gradient(298deg, rgb(6, 212, 85), rgb(6, 124, 51));
         --img-color: 1;
@@ -18,7 +17,6 @@
         --background: #fff;
         --text-color: #000;
         --numbers-color: #fff;
-        --header-background: rgba(134, 133, 133, 0.281);
         --button-color: linear-gradient(298deg, rgb(5, 230, 91), rgb(6, 138, 57));
         --button-hover: linear-gradient(298deg, rgb(6, 212, 85), rgb(6, 124, 51));
         --img-color: 0;
@@ -83,7 +81,7 @@ a {
 
 .subtitle {
     font-size: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5%;
     color: var(--text-color);
 }
 
@@ -92,7 +90,7 @@ a {
 }
 
 .selector {
-    margin-top: 3rem;
+    margin-top: 1%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -162,8 +160,8 @@ ul {
 
 li {
     cursor: pointer;
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 10%;
+    height: 28%;
     border-radius: 80%;
     margin: 0.3rem;
     display: flex;
