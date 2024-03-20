@@ -19,6 +19,8 @@ export const create = async (req: express.Request, res: express.Response) => {
     try {
         const {id, prize} = req.body;
 
+        console.log(req.body);
+
         if (!id || !prize) {
             res.sendStatus(400);
             return;

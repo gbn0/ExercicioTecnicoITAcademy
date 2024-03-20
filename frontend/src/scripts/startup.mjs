@@ -1,10 +1,19 @@
+import axios from 'https://cdn.skypack.dev/axios';
+
 const registrationWindow = document.querySelector('.registration');
 const cpfInput = document.querySelector('.cpfInput');
 const nameInput = document.querySelector('.nameInput');
 const betButton = document.querySelector('.betButton');
 const closeRegistrationButton = document.querySelector('.submitRegister');
 
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+export const api = axios.create({
+    baseURL: "https://exercicio-tecnico-it-academy.vercel.app/",
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Allow-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
+})
 
 betButton.addEventListener('click', openRegistration);
 
@@ -15,16 +24,10 @@ let cpf;
 let name;
 
 const checkEdition = async () => {
-    return await fetch('https://exercicio-tecnico-it-academy-33ykzsfsl.vercel.app/edition/last', {
-        method: 'GET'
-    }).then(response => {
-
-        if (!response.ok) {
-            throw new Error(`Erro de requisição: ${response.status}`);
-          }
-        return response.json()
+    return await api.get('/edition/last', {}).then(response => {
+        return response.data
     }).then(data => {
-        
+        console.log(data)
         if(data == null) {
             localStorage.setItem('edition', editionNumber);
             return true;
@@ -44,15 +47,11 @@ const checkEdition = async () => {
 
 async function createNewEdition() {
     if(await checkEdition()) {
-        
         const randomPrizeNumber = Math.floor(Math.random() * (1000001 - 250000) + 250000);
-        await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//edition/create', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        await api.post('edition/create', {
             body: JSON.stringify({ id: editionNumber, prize: randomPrizeNumber })
         }).then(response => response.json());
     }
-
 }
 
 function openRegistration() {
@@ -67,7 +66,7 @@ async function closeRegistration() {
     registrationWindow.classList.remove('active');
     
     try {
-        const res = await fetch('https://exercicio-tecnico-it-academy-elc6ngioe.vercel.app//user/create', {
+        const res = await fetch('user/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ cpf: parseInt(cpfInput.value), name: nameInput.value })
