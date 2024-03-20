@@ -12,9 +12,9 @@ noButton.addEventListener('click', closeConfirmation);
 yesButton.addEventListener('click', drawNumbers);
 
 async function loadData() {
-    await api.post('bets/list', {
+    await api.post('bet/list', {
         edition: localStorage.getItem('edition')
-    }).then(response => response.json()).then(data => {
+    }).then(data => data.data).then(data => {
         if(data.length == 0) {
             table.innerHTML += `<tr><td>Sem apostas até o momento</td></tr>`;
         }else {
@@ -31,7 +31,7 @@ loadData()
 async function drawNumbers() {
     await api.post('edition/draw', {
         id: localStorage.getItem('edition')
-    }).then(response => response.json()).then(data => {
+    }).then(data => data.data).then(data => {
         console.log(data);
         localStorage.setItem('result', JSON.stringify(data));
         closeConfirmation();

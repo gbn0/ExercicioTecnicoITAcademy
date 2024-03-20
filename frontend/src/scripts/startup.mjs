@@ -17,9 +17,7 @@ let cpf;
 let name;
 
 const checkEdition = async () => {
-    return await api.get('/edition/last', {}).then(response => {
-        return response.data
-    }).then(data => {
+    return await api.get('/edition/last', {}).then(response => response.data).then(data => {
         console.log(data)
         if(data == null) {
             localStorage.setItem('edition', editionNumber);
@@ -64,7 +62,6 @@ async function closeRegistration() {
                 cpf: parseInt(cpfInput.value), 
                 name: nameInput.value 
             }).then((res) => {
-            console.log(res);
             cpf = cpfInput.value;
             name = nameInput.value;
             localStorage.setItem('cpf', cpf);

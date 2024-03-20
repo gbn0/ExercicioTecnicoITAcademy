@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from './api.mjs';
 
 
 const numbersList = document.querySelectorAll('.numero');
@@ -33,13 +33,13 @@ clearButton.addEventListener('click', () => {
 randomBetButton.addEventListener('click', async () => {
     var id = await api.post('bet/nextId', {
             edition: edition
-        }).then(response => response.json()).then(data => {
+        }).then(data => data.data).then(data => {
             api.post('bet/create', {
                 id: data,
                 numbers: [],
                 better: cpf,
                 edition: edition
-            }).then(response => response.json()).then(data => {
+            }).then(data => data.data).then(data => {
                 console.log(data);
                 alert('Aposta realizada com sucesso');
             })
@@ -51,13 +51,14 @@ betButton.addEventListener('click', async () => {
     if(selectedNumbers.length === 5) {
         var id = await api.post('bet/nextId', {
             edition: edition
-        }).then(response => response.json()).then(data => {
+        }).then(data => data.data).then(data => {
+            console.log(data);
             api.post('bet/create', {
                 id: data,
                 numbers: selectedNumbers,
                 better: cpf,
                 edition: edition
-            }).then(response => response.json()).then(data => {
+            }).then(data => data.data).then(data => {
                 console.log(data);
                 alert('Aposta realizada com sucesso');
                 window.location.assign('/frontend/src/home.html');
