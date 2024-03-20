@@ -19,6 +19,11 @@ export const create = async (req: express.Request, res: express.Response) => {
     try {
         const {id, prize} = req.body;
 
+        console.log(req.body);
+        console.log(req.body.id);
+        console.log(req.body.prize);
+        console.log(id + "-" + prize);
+
         const edition = await createEdition(id, prize);
 
         return res.status(200).json(edition).end();
