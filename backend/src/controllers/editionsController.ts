@@ -19,11 +19,6 @@ export const create = async (req: express.Request, res: express.Response) => {
     try {
         const {id, prize} = req.body;
 
-        console.log(req.body);
-        console.log(req.body.id);
-        console.log(req.body.prize);
-        console.log(id + "-" + prize);
-
         const edition = await createEdition(id, prize);
 
         return res.status(200).json(edition).end();
@@ -117,10 +112,19 @@ export const draw = async (req: express.Request, res: express.Response) => {
                 }
                 
             }
+
+            var betNumbers: number[] = [];
+            for(var bet of editionBets) {
+                for(var number of bet.numbers) {
+                    betNumbers[number] += 1;
+                }
+            }
+
             var returnObj = {
                 edition: id,
                 drawnNumbers: drawnNumbers,
-                winners: winnersRes
+                winners: winnersRes,
+                betNumbers: betNumbers
             }
             return res.status(200).json(returnObj).end();
         }else {

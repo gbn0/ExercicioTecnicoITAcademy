@@ -9,7 +9,6 @@ const randomBetButton = document.querySelector('.randomButton');
 
 
 const cpf = parseInt(localStorage.getItem('cpf'));
-const name = localStorage.getItem('name');
 const edition = localStorage.getItem('edition');
 
 numbersList.forEach((element) => {
