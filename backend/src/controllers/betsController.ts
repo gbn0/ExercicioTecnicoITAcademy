@@ -14,7 +14,7 @@ export const create = async (req: express.Request, res: express.Response) => {
         if(numbers.length == 0) {
             numbers = [];
             while(numbers.length < 5) {
-                var drawnNumber = Math.floor(Math.random() * 50);
+                var drawnNumber = Math.floor(Math.random() * (51 - 1)) + 1;
                 if(!numbers.includes(drawnNumber)) {
                     numbers.push(drawnNumber);
                 }

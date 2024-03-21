@@ -58,7 +58,7 @@ export const draw = async (req: express.Request, res: express.Response) => {
         var drawnNumbers: Number[] = [];
         if(edition && editionBets.length > 0) {
             while(drawnNumbers.length < 5) {
-                var drawnNumber = Math.floor(Math.random() * (50 - 1) + 1);
+                var drawnNumber = Math.floor(Math.random() * (51 - 1)) + 1;
                 if(!drawnNumbers.includes(drawnNumber)) {
                     drawnNumbers.push(drawnNumber);
                 }
@@ -79,7 +79,7 @@ export const draw = async (req: express.Request, res: express.Response) => {
                 }
 
                 if(winners.length == 0) {
-                    var drawnNumber = Math.floor(Math.random() * (50 - 1) + 1);
+                    var drawnNumber = Math.floor(Math.random() * (51 - 1)) + 1;
                     if(!drawnNumbers.includes(drawnNumber)) {
                         drawnNumbers.push(drawnNumber);
                     }
