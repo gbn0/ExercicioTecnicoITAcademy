@@ -116,7 +116,7 @@ export const draw = async (req: express.Request, res: express.Response) => {
             var betNumbers: number[] = [];
             for(var bet of editionBets) {
                 for(var number of bet.numbers) {
-                    betNumbers[number] += 1;
+                    betNumbers[number] >= 1 ? betNumbers[number] += 1 : betNumbers[number] = 1;
                 }
             }
 
