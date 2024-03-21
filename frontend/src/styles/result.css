@@ -111,7 +111,6 @@ table {
     overflow: hidden;
     box-shadow: 0 20px 7px #000;
     border-spacing: 0;
-    border-radius: 5% 5% 0 0;
 }
 
 th{
@@ -128,10 +127,6 @@ th, td {
 td {
     font-size: 1rem;
     color: #000;
-}
-
-tr:nth-child(odd) {
-    background-color: lightgray;
 }
 
 .editionText {

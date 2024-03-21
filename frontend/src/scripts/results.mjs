@@ -24,16 +24,22 @@ function renderResults() {
     drawnNumbers.innerHTML = `${data.drawnNumbers}`;
     if(data.winners.length == 0) {
         table.innerHTML = '<tr><td>Nenhum vencedor</td></tr>';
-        return;
+    }else {
+        data.winners.forEach(element => {
+            table.innerHTML += `<tr><td>${element.username}</td><td>${element.usercpf}</td><td>${element.betnumbers}</td><td>${parseInt(element.prize)/data.winners.length}</td></tr>`;
+        });
     }
-    data.winners.forEach(element => {
-        table.innerHTML += `<tr><td>${element.username}</td><td>${element.usercpf}</td><td>${element.betnumbers}</td><td>${parseInt(element.prize)/data.winners.length}</td></tr>`;
-    });
+    
 
     roundsNumber.innerHTML = `NÚMERO DE RODADAS: ${data.drawnNumbers.length}`;
-    for(var i = 1; i < data.betNumbers; i++) {
-        frequencyTable.innerHTML += `<tr><td>${i}</td><td>${data.betNumbers[i]}</td></tr>`;
+    for(var i = 1; i < data.betNumbers.length; i++) {
+        console.log("entrei");
+        if(data.betNumbers[i] != null) {
+            
+            frequencyTable.innerHTML += `<tr><td>${i}</td><td>${data.betNumbers[i]}</td></tr>`;
+        }
     }
+    sortTable();
 }
 
 function sortTable() {
@@ -47,7 +53,7 @@ function sortTable() {
             firstRow = rows[i].getElementsByTagName('td')[1];
             secondRow = rows[i + 1].getElementsByTagName('td')[1];
 
-            if(firstRow.innerHTML.toLowerCase() > secondRow.innerHTML.toLowerCase()) {
+            if(firstRow.innerHTML.toLowerCase() < secondRow.innerHTML.toLowerCase()) {
                 needSort = true;
                 break;
             }
