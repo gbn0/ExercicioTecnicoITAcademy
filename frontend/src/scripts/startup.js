@@ -1,4 +1,11 @@
-import { api } from './api.mjs';
+const api = axios.create({
+    baseURL: "https://exercicio-tecnico-it-academy.vercel.app/",
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Allow-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
+})
 
 const registrationWindow = document.querySelector('.registration');
 const cpfInput = document.querySelector('.cpfInput');
@@ -77,7 +84,7 @@ async function closeRegistration() {
 }
 
 function changeScreen() {
-    window.location.assign('/frontend/src/bet.html');
+    window.location.assign('./bet.html');
 }
 
 

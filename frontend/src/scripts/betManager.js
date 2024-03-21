@@ -1,5 +1,11 @@
-import { api } from './api.mjs';
-
+const api = axios.create({
+    baseURL: "https://exercicio-tecnico-it-academy.vercel.app/",
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Allow-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
+});
 
 const numbersList = document.querySelectorAll('.numero');
 const inputField = document.querySelector('.selectedNumbers');
@@ -60,7 +66,7 @@ betButton.addEventListener('click', async () => {
             }).then(data => data.data).then(data => {
                 console.log(data);
                 alert('Aposta realizada com sucesso');
-                window.location.assign('/frontend/src/home.html');
+                window.location.assign('./home.html');
             })
         });
         

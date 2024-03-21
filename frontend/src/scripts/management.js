@@ -1,4 +1,11 @@
-import { api } from './api.mjs';
+const api = axios.create({
+    baseURL: "https://exercicio-tecnico-it-academy.vercel.app/",
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Allow-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
+})
 
 
 const table = document.querySelector('.dataTable');
@@ -36,7 +43,7 @@ async function drawNumbers() {
         localStorage.setItem('result', JSON.stringify(data));
         closeConfirmation();
         alert('Sorteio realizado com sucesso');
-        window.location.assign('/frontend/src/result.html');
+        window.location.assign('./result.html');
     })
 }
 
